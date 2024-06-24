@@ -64,7 +64,8 @@ const run = async (config: R2Config) => {
         //const fileName = file.replace(/^.*[\\\/]/, "");
         const fileName = file.replace(config.sourceDir, "");
         let fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
-        fileKey = fileKey.replaceAll(path.sep, '/')
+        // fix windows path issue
+        fileKey = fileKey.replace(/\\/g, '/')
 
         if (fileKey.includes('.gitkeep'))
             continue;
